@@ -10,7 +10,7 @@ build: healthcheck Dockerfile
 	docker build --no-cache -t sharkzeeh/crypto:latest .
 
 start:
-	docker run --rm --name crypto --volume `pwd`:/app/ sharkzeeh/crypto
+	docker run --detach --rm --name crypto --volume `pwd`:/app/ sharkzeeh/crypto
 
 stop: healthcheck
 	docker stop crypto
