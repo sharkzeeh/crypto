@@ -1,4 +1,4 @@
-.PHONY: start stop build healthcheck test clean push
+.PHONY: start stop build healthcheck test containerclean imageclean push
 
 test: test_tests.py
 	python3 test_tests.py
@@ -18,8 +18,12 @@ stop: healthcheck
 push: build
 	docker push sharkzeeh/crypto
 
-clean:
+containerclean:
 	docker container prune -f
+
+imageclean:
+	docker rmi -f `docker images -a | grep crypto | grep -Po '\b\w{12}\b'` || true
+	docker rmi -f `docker images -a | grep none | grep -Po '\b\w{12}\b'`
 
 
 
