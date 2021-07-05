@@ -1,7 +1,7 @@
 .PHONY: start stop build healthcheck test clean push
 
-test: test_file.py
-	python3 test_file.py
+test: test_tests.py
+	python3 test_tests.py
 
 healthcheck: ./healthcheck.sh
 	./healthcheck.sh
