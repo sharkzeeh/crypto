@@ -1,9 +1,9 @@
 '''
-Declare time period (in seconds) to evaluate your moving average from Binance
+Declare time period (in minutes) to evaluate your moving average from Binance
 
-and coins you want to log
+and coins you want to keep track of
 '''
 
-window = 5
+window = 3
 
 coins = ['btc', 'eth', 'bnb']

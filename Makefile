@@ -12,7 +12,7 @@ build: healthcheck Dockerfile
 start:
 	docker run --detach --rm --name crypto --volume `pwd`:/app/ sharkzeeh/crypto
 
-stop: healthcheck
+stop:
 	docker stop crypto
 
 push: build

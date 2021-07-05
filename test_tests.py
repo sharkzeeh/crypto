@@ -13,13 +13,10 @@ def test_eval_ma():
 
 
 def test_format_window():
-    assert format_window(5) == '5s'
-    assert format_window(60) == '1m_0s'
-    assert format_window(61) == '1m_1s'
-    assert format_window(3599) == '59m_59s'
-    assert format_window(3600) == '1h_0m_0s'
-    assert format_window(3661) == '1h_1m_1s'
-    assert format_window(82861) == '23h_1m_1s'
+    assert format_window(5) == '5m'
+    assert format_window(60) == '1h_0m'
+    assert format_window(61) == '1h_1m'
+    assert format_window(232) == '3h_52m'
 
 
 def test_format_time():

@@ -15,7 +15,7 @@ current_coin_window = {}
 connections = [url_builder(coin + 'usdt') for coin in coins]
 
 
-async def handle_socket(url, csv_writer=None):
+async def handle_socket(url, csv_writer=None, minutus=True):
     async with websockets.connect(url) as websocket:
         while True:
             data = json.loads(await websocket.recv())
@@ -23,14 +23,17 @@ async def handle_socket(url, csv_writer=None):
             data = data['data']
             event_time = time.localtime(data['E'] // 1000)
             event_time = format_time(event_time)
-            close_price = float(data["c"])
-            current_coin_window.setdefault(coin, []).append(close_price)
-            ma = eval_ma(data=current_coin_window[coin][-5:], window=window)
-            if ma:
-                print(f'{coin:>10s} {ma:>10.2f} {event_time:>25s}')
-                current_coin_window[coin] = current_coin_window[coin][1:]
-                row = (coin, str(int(ma)), event_time)
-                await csv_writer.writerow(row)
+            candle = data['k']
+            close_price = float(candle['c'])
+            closed = candle['x']
+            if closed:
+                current_coin_window.setdefault(coin, []).append(close_price)
+                ma = eval_ma(data=current_coin_window[coin][-window:], window=window)
+                if ma:
+                    print(f'{coin:>10s} {ma:>10.2f} {event_time:>25s}')
+                    current_coin_window[coin] = current_coin_window[coin][1:]
+                    row = (coin, str(int(ma)), event_time)
+                    await csv_writer.writerow(row)
 
 
 async def main():
