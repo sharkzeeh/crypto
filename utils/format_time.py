@@ -4,6 +4,5 @@ def format_time(time):
     day = time.tm_mday
     hr = time.tm_hour
     mnt = time.tm_min
-    sec = time.tm_sec
-    time = f'{day:02d}-{mon:02d}-{year:d} {hr:02d}:{mnt:02d}:{sec:02d}'
+    time = f'{day:02d}-{mon:02d}-{year:d} {hr:02d}:{mnt:02d}'
     return time

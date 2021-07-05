@@ -21,5 +21,5 @@ def test_format_window():
 
 def test_format_time():
     event_time = time.struct_time((2021, 7, 5, 12, 9, 38, 0, 186, 0))
-    print_time = '05-07-2021 12:09:38'
+    print_time = '05-07-2021 12:09'
     assert format_time(event_time) == print_time
