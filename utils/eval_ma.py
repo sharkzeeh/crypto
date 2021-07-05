@@ -13,4 +13,4 @@ def eval_ma(data, window=5):
     if len(data) < window:
         ...
     else:
-        return np.mean(data[-5:])
+        return np.mean(data[-window:])
