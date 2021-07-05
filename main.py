@@ -23,11 +23,11 @@ async def handle_socket(url, csv_writer=None):
             data = data['data']
             event_time = time.localtime(data['E'] // 1000)
             event_time = format_time(event_time)
-            close_price = int(float(data["c"]))
+            close_price = float(data["c"])
             current_coin_window.setdefault(coin, []).append(close_price)
             ma = eval_ma(data=current_coin_window[coin][-5:], window=window)
             if ma:
-                print(f'{coin:>10s} {int(ma):>10d} {event_time:>25s}')
+                print(f'{coin:>10s} {ma:>10.2f} {event_time:>25s}')
                 current_coin_window[coin] = current_coin_window[coin][1:]
                 row = (coin, str(int(ma)), event_time)
                 await csv_writer.writerow(row)
