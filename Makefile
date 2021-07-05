@@ -1,7 +1,7 @@
 .PHONY: start stop build healthcheck test containerclean imageclean push
 
 test: test_tests.py
-	python3 test_tests.py
+	pytest
 
 healthcheck: ./healthcheck.sh
 	./healthcheck.sh
